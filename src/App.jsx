@@ -6,7 +6,11 @@ function App() {
     <div className="App">
       <h1>Calculator App</h1>
       <div className="calculator">
-        <div className="display">Display</div>
+        <div className="display">
+          <h2 className="display-input">
+            1234522222222222222222222222222222222
+          </h2>
+        </div>
         <div className="buttons-container">
           <div className="num-buttons">
             <button className="btn">7</button>
