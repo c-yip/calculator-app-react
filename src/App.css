@@ -19,7 +19,57 @@ body {
   background-color: var(--clr-calc);
   border: 1px solid var(--clr-light);
   border-radius: 0.3em;
-  /* change when done with all elements */
-  height: 556px;
-  width: 342px;
+  padding: 3em;
+}
+
+.buttons-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 0.5em;
+}
+
+.num-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 0.5em;
+  grid-column-start: 2;
+}
+
+.op-buttons {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 0.5em;
+}
+
+.additional-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0.5em;
+  grid-row-start: 1;
+}
+
+.btn {
+  background-color: var(--num-clr);
+  border-radius: 28px;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 17px;
+  font-weight: bold;
+  /* padding: 16px 14px; */
+  height: 45px;
+  width: 62px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn:hover {
+  background-color: var(--op-clr);
+}
+
+.btn:active {
+  position: relative;
+  top: 1px;
 }

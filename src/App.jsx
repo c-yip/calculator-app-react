@@ -20,6 +20,7 @@ function App() {
             <button className="btn">3</button>
             <button className="btn">0</button>
             <button className="btn">.</button>
+            <button className="btn">=</button>
           </div>
 
           <div className="op-buttons">
@@ -27,7 +28,6 @@ function App() {
             <button className="btn">X</button>
             <button className="btn">-</button>
             <button className="btn">+</button>
-            <button className="btn">=</button>
           </div>
 
           <div className="additional-buttons">
