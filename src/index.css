@@ -9,8 +9,13 @@
   --clr-dark: #1c1c1c;
 
   --num-clr: #505050;
+  --num-clr-hov: #3c3c3c;
+
   --op-clr: #ff9500;
+  --op-clr-hov: #ff7f00;
+
   --op-alt-clr: #d4d4d2;
+  --op-alt-clr-hov: #c2c2c0;
 
   --box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25);
 }

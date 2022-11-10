@@ -73,3 +73,28 @@ body {
   position: relative;
   top: 1px;
 }
+
+.num-buttons .btn {
+  background-color: var(--num-clr);
+}
+
+.num-buttons > .btn:hover {
+  background-color: var(--num-clr-hov);
+}
+
+.op-buttons .btn {
+  background-color: var(--op-clr);
+}
+
+.op-buttons > .btn:hover {
+  background-color: var(--op-clr-hov);
+}
+
+.additional-buttons .btn {
+  background-color: var(--op-alt-clr);
+  color: var(--clr-dark);
+}
+
+.additional-buttons > .btn:hover {
+  background-color: var(--op-alt-clr-hov);
+}
