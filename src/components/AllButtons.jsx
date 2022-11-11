@@ -14,7 +14,7 @@ export default function AllButtons() {
 
   const numberButtonsArray = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0, "."];
   const operatorButtonsArray = ["/", "*", "-", "+"];
-  const additionalButtonsArray = ["+/-", "%", "^", "(", ")"];
+  const additionalButtonsArray = ["+/-", "%", "**", "(", ")"];
 
   const numberButtonsElements = numberButtonsArray.map((number) => {
     return (
@@ -34,7 +34,14 @@ export default function AllButtons() {
   });
 
   const additionalButtonsElements = additionalButtonsArray.map((additional) => {
-    return <Button key={nanoid()} value={additional} text={additional} />;
+    return (
+      <Button
+        key={nanoid()}
+        value={additional}
+        text={additional}
+        onClick={onClick}
+      />
+    );
   });
 
   return (

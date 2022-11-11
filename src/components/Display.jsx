@@ -7,7 +7,7 @@ export default function Display() {
   return (
     <div className="display">
       <h2 className="display-input">
-        {equation.displayResult ? equation.result.toFixed(3) : equation.string}
+        {equation.displayResult ? equation.result : equation.string}
       </h2>
       <h3 className="display-sub-input">
         {!equation.displayResult && equation.result}
