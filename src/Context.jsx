@@ -6,16 +6,13 @@ function ContextProvider({ children }) {
   // state that stores user inputs, stores an equation, and stores the result
   const [data, setData] = useState({
     input: [],
-    display: "",
-    equation: "",
-    result: "",
     operatorPressed: false,
-    decimalUsed: false,
   });
 
   const [equation, setEquation] = useState({
     string: "",
     result: "",
+    decimalUsed: false,
   });
 
   useEffect(() => {
@@ -28,6 +25,16 @@ function ContextProvider({ children }) {
         };
       });
     }
+
+    // prevents multiple decimal points from being used in a single number
+    if (data.input[data.input.length - 1] === "." && !data.operatorPressed) {
+      setEquation((prev) => {
+        return {
+          ...prev,
+          decimalUsed: true,
+        };
+      });
+    }
   }, [data]);
 
   // onClick formula stores input in data.input
@@ -35,21 +42,11 @@ function ContextProvider({ children }) {
     const value = e.target.value;
 
     // prevents multiple decimals from being used
-    if (value === ".") {
-      setData((prev) => {
-        return {
-          ...prev,
-          decimalUsed: true,
-        };
-      });
-    }
-
-    if (data.decimalUsed && value === ".") {
+    if (equation.decimalUsed && value === ".") {
       return;
     }
 
     // prevents multiple operators from being used
-
     if (data.operatorPressed) {
       setData({
         ...data,
@@ -71,16 +68,21 @@ function ContextProvider({ children }) {
     const value = e.target.value;
     if (data.operatorPressed) {
       return;
+    } else {
+      setData((prev) => {
+        return {
+          ...prev,
+          input: [...prev.input, value],
+          operatorPressed: true,
+        };
+      });
+      setEquation((prev) => {
+        return {
+          ...prev,
+          decimalUsed: false,
+        };
+      });
     }
-
-    setData((prev) => {
-      return {
-        ...prev,
-        input: [...prev.input, value],
-        operatorPressed: true,
-        decimalUsed: false,
-      };
-    });
   };
 
   // use Function() constructor to evaluate equation
@@ -100,7 +102,7 @@ function ContextProvider({ children }) {
     }
 
     // if the last character in the equation is a decimal, remove it
-    if (data.decimalUsed) {
+    if (data.input[data.input.length - 1] === ".") {
       setData((prev) => {
         return {
           ...prev,
