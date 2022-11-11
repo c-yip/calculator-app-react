@@ -68,6 +68,10 @@ function ContextProvider({ children }) {
   const onClick = (e) => {
     const value = e.target.value;
 
+    if (equation.displayResult) {
+      onClickClear();
+    }
+
     // prevents multiple decimals from being used
     if (equation.decimalUsed && value === ".") {
       return;
@@ -93,7 +97,10 @@ function ContextProvider({ children }) {
   // and decimalUsed to false
   const onClickOperator = (e) => {
     const value = e.target.value;
-    if (data.operatorPressed) {
+    if (
+      (data.operatorPressed && value !== "-") ||
+      data.input[data.input.length - 1] == "-"
+    ) {
       return;
     } else {
       setData((prev) => {
