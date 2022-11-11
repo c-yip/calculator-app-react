@@ -13,6 +13,7 @@ function ContextProvider({ children }) {
     string: "",
     result: "",
     decimalUsed: false,
+    displayResult: false,
   });
 
   useEffect(() => {
@@ -22,6 +23,17 @@ function ContextProvider({ children }) {
           ...prev,
           // joins input array into a string for use of display and for calculation
           string: data.input.join(""),
+        };
+      });
+    }
+    if (data.operatorPressed || equation.decimalUsed) {
+      return;
+    } else {
+      setEquation((prev) => {
+        return {
+          ...prev,
+          // calculates the result of the equation
+          result: calc(prev.string),
         };
       });
     }
@@ -91,30 +103,10 @@ function ContextProvider({ children }) {
   }
 
   const onClickEqual = () => {
-    // if the last character in the equation is an operator, remove it
-    if (data.operator) {
-      setData((prev) => {
-        return {
-          ...prev,
-          input: prev.input.slice(0, -1),
-        };
-      });
-    }
-
-    // if the last character in the equation is a decimal, remove it
-    if (data.input[data.input.length - 1] === ".") {
-      setData((prev) => {
-        return {
-          ...prev,
-          input: prev.input.slice(0, -1),
-        };
-      });
-    }
-
     setEquation((prev) => {
       return {
         ...prev,
-        result: calc(prev.string),
+        displayResult: true,
       };
     });
   };

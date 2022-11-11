@@ -6,7 +6,9 @@ export default function Display() {
 
   return (
     <div className="display">
-      <h2 className="display-input">{equation.string}</h2>
+      <h2 className="display-input">
+        {equation.displayResult ? equation.result : equation.string}
+      </h2>
     </div>
   );
 }
