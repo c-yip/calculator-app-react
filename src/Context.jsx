@@ -16,6 +16,20 @@ function ContextProvider({ children }) {
     displayResult: false,
   });
 
+  // use Function() constructor to evaluate equation
+  function calc(string) {
+    return new Function("return " + string)();
+  }
+
+  // prevent app from crashing on syntax error
+  function tryCalc(string) {
+    try {
+      return calc(string);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     if (data.input.length > 0) {
       setEquation((prev) => {
@@ -26,17 +40,14 @@ function ContextProvider({ children }) {
         };
       });
     }
-    if (data.operatorPressed || equation.decimalUsed) {
-      return;
-    } else {
-      setEquation((prev) => {
-        return {
-          ...prev,
-          // calculates the result of the equation
-          result: calc(prev.string),
-        };
-      });
-    }
+
+    setEquation((prev) => {
+      return {
+        ...prev,
+        // calculates the result of the equation
+        result: tryCalc(prev.string),
+      };
+    });
 
     // prevents multiple decimal points from being used in a single number
     if (data.input[data.input.length - 1] === "." && !data.operatorPressed) {
@@ -96,11 +107,6 @@ function ContextProvider({ children }) {
       });
     }
   };
-
-  // use Function() constructor to evaluate equation
-  function calc(string) {
-    return new Function("return " + string)();
-  }
 
   const onClickEqual = () => {
     setEquation((prev) => {
