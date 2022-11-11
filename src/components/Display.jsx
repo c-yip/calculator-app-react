@@ -9,6 +9,9 @@ export default function Display() {
       <h2 className="display-input">
         {equation.displayResult ? equation.result : equation.string}
       </h2>
+      <h3 className="display-sub-input">
+        {!equation.displayResult && equation.result}
+      </h3>
     </div>
   );
 }
