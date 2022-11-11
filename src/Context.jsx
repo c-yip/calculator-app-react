@@ -156,6 +156,29 @@ function ContextProvider({ children }) {
       };
     });
 
+    if (data.input[data.input.length - 1] === ".") {
+      setEquation((prev) => {
+        return {
+          ...prev,
+          decimalUsed: false,
+        };
+      });
+    }
+
+    if (
+      data.input[data.input.length - 1] === "+" ||
+      data.input[data.input.length - 1] === "-" ||
+      data.input[data.input.length - 1] === "*" ||
+      data.input[data.input.length - 1] === "/"
+    ) {
+      setData((prev) => {
+        return {
+          ...prev,
+          operatorPressed: false,
+        };
+      });
+    }
+
     data.input.length <= 1 && onClickClear();
   };
 
