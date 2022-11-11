@@ -4,8 +4,13 @@ import { Context } from "../Context";
 import { nanoid } from "nanoid";
 
 export default function AllButtons() {
-  const { onClick, onClickOperator, onClickEqual, onClickClear } =
-    useContext(Context);
+  const {
+    onClick,
+    onClickOperator,
+    onClickEqual,
+    onClickClear,
+    onClickDelete,
+  } = useContext(Context);
 
   const numberButtonsArray = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0, "."];
   const operatorButtonsArray = ["/", "*", "-", "+"];
@@ -42,7 +47,7 @@ export default function AllButtons() {
       <div className="additional-buttons">
         <Button value={"ac"} text={"AC"} onClick={onClickClear} />
         {additionalButtonsElements}
-        <Button value={"del"} text={"DEL"} />
+        <Button value={"del"} text={"DEL"} onClick={onClickDelete} />
       </div>
     </>
   );

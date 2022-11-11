@@ -141,6 +141,17 @@ function ContextProvider({ children }) {
     setError(false);
   };
 
+  const onClickDelete = () => {
+    setData((prev) => {
+      return {
+        ...prev,
+        input: prev.input.slice(0, -1),
+      };
+    });
+
+    data.input.length <= 1 && onClickClear();
+  };
+
   console.log("Context.js:", data, equation, "error:", error);
 
   return (
@@ -150,6 +161,7 @@ function ContextProvider({ children }) {
         onClickOperator,
         onClickEqual,
         onClickClear,
+        onClickDelete,
         equation,
       }}
     >
