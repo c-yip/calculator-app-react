@@ -1,8 +1,6 @@
 import "./App.css";
 import Display from "./components/Display";
-import NumberButtons from "./components/NumberButtons";
-import OperatorButtons from "./components/OperatorButtons";
-import AdditionalButtons from "./components/AdditionalButtons";
+import AllButtons from "./components/AllButtons";
 
 function App() {
   return (
@@ -11,11 +9,7 @@ function App() {
       <div className="calculator">
         <Display />
         <div className="buttons-container">
-          <NumberButtons />
-
-          <OperatorButtons />
-
-          <AdditionalButtons />
+          <AllButtons />
         </div>
       </div>
     </div>
