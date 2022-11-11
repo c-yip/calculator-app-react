@@ -16,6 +16,8 @@ function ContextProvider({ children }) {
     displayResult: false,
   });
 
+  const [error, setError] = useState(false);
+
   // use Function() constructor to evaluate equation
   function calc(string) {
     return new Function("return " + string)();
@@ -24,8 +26,10 @@ function ContextProvider({ children }) {
   // prevent app from crashing on syntax error
   function tryCalc(string) {
     try {
+      setError(false);
       return calc(string);
     } catch (error) {
+      setError(true);
       console.log(error);
     }
   }
@@ -110,14 +114,20 @@ function ContextProvider({ children }) {
 
   const onClickEqual = () => {
     setEquation((prev) => {
-      return {
-        ...prev,
-        displayResult: true,
-      };
+      return error
+        ? {
+            ...prev,
+            displayResult: true,
+            result: "Format Error",
+          }
+        : {
+            ...prev,
+            displayResult: true,
+          };
     });
   };
 
-  console.log("Context.js:", data, equation);
+  console.log("Context.js:", data, equation, "error:", error);
 
   return (
     <Context.Provider
