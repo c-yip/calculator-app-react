@@ -6,7 +6,7 @@ export default function Display() {
 
   return (
     <div className="display">
-      <h2 className="display-input">{`${input.inputOne} ${input.operator} ${input.inputTwo}`}</h2>
+      <h2 className="display-input">{`${input.inputNumberOne} ${input.operator} ${input.inputNumberTwo}`}</h2>
     </div>
   );
 }

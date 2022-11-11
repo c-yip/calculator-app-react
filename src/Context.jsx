@@ -4,19 +4,41 @@ const Context = createContext();
 
 function ContextProvider({ children }) {
   const [input, setInput] = useState({
-    inputOne: "",
-    inputTwo: "",
+    inputNumberOne: "",
+    inputNumberTwo: "",
     operator: "",
+    operatorPressed: false,
   });
 
   function handleNumberClick(event) {
     const value = event.target.value;
-    console.log(value);
+    if (input.operatorPressed == false) {
+      setInput((prevState) => ({
+        ...prevState,
+        inputNumberOne: prevState.inputNumberOne + value,
+      }));
+    } else {
+      setInput((prevState) => ({
+        ...prevState,
+        inputNumberTwo: prevState.inputNumberTwo + value,
+      }));
+    }
+
+    if (input.operator !== "") {
+      setInput((prevState) => ({
+        ...prevState,
+        inputNumberTwo: prevState.inputNumberTwo + value,
+      }));
+    }
   }
 
   function handleOperatorClick(event) {
     const value = event.target.value;
-    console.log(value);
+    setInput((prevState) => ({
+      ...prevState,
+      operatorPressed: true,
+      operator: value,
+    }));
   }
 
   function handleAdditionalClick(event) {
@@ -24,7 +46,13 @@ function ContextProvider({ children }) {
     console.log(value);
   }
 
-  return <Context.Provider value={{ input }}>{children}</Context.Provider>;
+  console.log("Context.js:", input);
+
+  return (
+    <Context.Provider value={{ input, handleNumberClick, handleOperatorClick }}>
+      {children}
+    </Context.Provider>
+  );
 }
 
 export { ContextProvider, Context };
