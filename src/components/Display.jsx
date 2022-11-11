@@ -7,6 +7,7 @@ export default function Display() {
   return (
     <div className="display">
       <h2 className="display-input">
+        {/* conditional rendering for main display */}
         {equation.displayResult ? equation.result : equation.string}
       </h2>
       <h3 className="display-sub-input">

@@ -9,6 +9,7 @@ function ContextProvider({ children }) {
     operatorPressed: false,
   });
 
+  // state that stores the equation, result, and whether to display the result
   const [equation, setEquation] = useState({
     string: "",
     result: "",
@@ -16,6 +17,7 @@ function ContextProvider({ children }) {
     displayResult: false,
   });
 
+  // state that tracks errors to keep app from crashing
   const [error, setError] = useState(false);
 
   // use Function() constructor to evaluate equation
@@ -68,6 +70,7 @@ function ContextProvider({ children }) {
   const onClick = (e) => {
     const value = e.target.value;
 
+    // clears data after result is displayed
     if (equation.displayResult) {
       onClickClear();
     }
@@ -119,6 +122,7 @@ function ContextProvider({ children }) {
     }
   };
 
+  // onClick equals displays the result or error message
   const onClickEqual = () => {
     setEquation((prev) => {
       return error
@@ -181,8 +185,6 @@ function ContextProvider({ children }) {
 
     data.input.length <= 1 && onClickClear();
   };
-
-  console.log("Context.js:", data, equation, "error:", error);
 
   return (
     <Context.Provider
