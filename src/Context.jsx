@@ -10,6 +10,15 @@ function ContextProvider({ children }) {
     operatorPressed: false,
   });
 
+  useEffect(() => {
+    if (input.operator !== "" && input.operatorPressed === false) {
+      setInput((prevState) => ({
+        ...prevState,
+        operatorPressed: true,
+      }));
+    }
+  }, [input]);
+
   function handleNumberClick(event) {
     const value = event.target.value;
     if (input.operatorPressed == false) {
@@ -21,13 +30,7 @@ function ContextProvider({ children }) {
       setInput((prevState) => ({
         ...prevState,
         inputNumberTwo: prevState.inputNumberTwo + value,
-      }));
-    }
-
-    if (input.operator !== "") {
-      setInput((prevState) => ({
-        ...prevState,
-        inputNumberTwo: prevState.inputNumberTwo + value,
+        operatorPressed: false,
       }));
     }
   }
@@ -36,8 +39,39 @@ function ContextProvider({ children }) {
     const value = event.target.value;
     setInput((prevState) => ({
       ...prevState,
-      operatorPressed: true,
       operator: value,
+    }));
+  }
+
+  function handleCalculation() {
+    let result;
+    switch (input.operator) {
+      case "":
+        return;
+      case "+":
+        result = input.inputNumberOne + input.inputNumberTwo;
+        break;
+      case "-":
+        result = input.inputNumberOne - input.inputNumberTwo;
+        break;
+      case "x":
+        result = input.inputNumberOne * input.inputNumberTwo;
+        break;
+      case "/":
+        result = input.inputNumberOne / input.inputNumberTwo;
+        break;
+      case "^":
+        result = input.inputNumberOne ** input.inputNumberTwo;
+        break;
+      default:
+        break;
+    }
+    setInput((prevState) => ({
+      ...prevState,
+      inputNumberOne: result,
+      inputNumberTwo: "",
+      operator: "",
+      operatorPressed: false,
     }));
   }
 
@@ -49,7 +83,14 @@ function ContextProvider({ children }) {
   console.log("Context.js:", input);
 
   return (
-    <Context.Provider value={{ input, handleNumberClick, handleOperatorClick }}>
+    <Context.Provider
+      value={{
+        input,
+        handleNumberClick,
+        handleOperatorClick,
+        handleCalculation,
+      }}
+    >
       {children}
     </Context.Provider>
   );

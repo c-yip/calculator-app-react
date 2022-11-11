@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Context } from "../Context";
 
 export default function NumberButtons() {
-  const { handleNumberClick } = useContext(Context);
+  const { handleNumberClick, handleCalculation } = useContext(Context);
 
   return (
     <div className="num-buttons">
@@ -39,7 +39,7 @@ export default function NumberButtons() {
       <button className="btn" value={"."} onClick={handleNumberClick}>
         .
       </button>
-      <button className="btn" value={"="}>
+      <button className="btn" value={"="} onClick={handleCalculation}>
         =
       </button>
     </div>
