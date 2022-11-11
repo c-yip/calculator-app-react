@@ -127,6 +127,20 @@ function ContextProvider({ children }) {
     });
   };
 
+  const onClickClear = () => {
+    setData({
+      input: [],
+      operatorPressed: false,
+    });
+    setEquation({
+      string: "",
+      result: "",
+      decimalUsed: false,
+      displayResult: false,
+    });
+    setError(false);
+  };
+
   console.log("Context.js:", data, equation, "error:", error);
 
   return (
@@ -135,6 +149,7 @@ function ContextProvider({ children }) {
         onClick,
         onClickOperator,
         onClickEqual,
+        onClickClear,
         equation,
       }}
     >
